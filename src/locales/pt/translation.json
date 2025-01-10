@@ -1,0 +1,16 @@
+{
+  "user_avatar_alt": "Avatar de {{user}}",
+  "followers": "seguidores",
+  "following": "seguindo",
+  "no_company": "Nenhuma empresa informada",
+  "no_location": "Nenhuma localização informada",
+  "visit_website": "Visitar Site",
+  "visit_twitter": "Visitar Twitter",
+  "contact": "Contato",
+  "no_description": "Nenhuma descrição fornecida",
+  "input_placeholder": "Pesquisar",
+  "search_button": "Pesquisar",
+  "error_no_user": "Não há usuários com esse nome.",
+  "load_all_repo": "Todos os repositórios foram carregados.",
+  "updated": "Atualizado"
+}

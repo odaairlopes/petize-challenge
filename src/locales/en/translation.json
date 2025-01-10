@@ -1,0 +1,16 @@
+{
+  "user_avatar_alt": "{{user}}'s avatar",
+  "followers": "followers",
+  "following": "following",
+  "no_company": "No company provided",
+  "no_location": "No location provided",
+  "visit_website": "Visit Website",
+  "visit_twitter": "Visit Twitter",
+  "contact": "Contact",
+  "no_description": "No description provided",
+  "input_placeholder": "Search",
+  "search_button": "Search",
+  "error_no_user": "There are no users with this name.",
+  "load_all_repo": "All repositories have been loaded.",
+  "updated": "Updated"
+}

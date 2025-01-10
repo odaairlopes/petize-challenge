@@ -1,35 +1,67 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import Home from "./pages/Home";
+import { fetchRepositories, fetchUser } from "./api/fetchData";
+import { IRepositoriesData, IUserData } from "./types/types";
+import UserInfo from "./pages/UserInfo";
+import { RouterProvider, createBrowserRouter } from "react-router";
+
+import { Box } from "@chakra-ui/react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [userData, setUserData] = useState<IUserData | null>(null);
+  const [repos, setRepos] = useState<IRepositoriesData[]>([]);
+  //const [error, setError] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+  const handleSearch = async (username: string) => {
+    try {
+      const user = await fetchUser(username);
+      const repos = await fetchRepositories(username);
+      setUserData(user);
+      setRepos(repos);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <Box px="112px">
+          <Home
+            username={username}
+            setUsername={setUsername}
+            onSearch={handleSearch}
+          />
+        </Box>
+      ),
+    },
+    {
+      path: "/user-info",
+      element:
+        userData && repos ? (
+          <Box px="112px">
+            <UserInfo
+              user={userData}
+              username={username}
+              setUsername={setUsername}
+              onSearch={handleSearch}
+            />
+          </Box>
+        ) : (
+          <Box px="112px">
+            <Home
+              username={username}
+              setUsername={setUsername}
+              onSearch={handleSearch}
+            />
+          </Box>
+        ),
+    },
+  ]);
+
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
